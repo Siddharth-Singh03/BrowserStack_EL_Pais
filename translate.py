@@ -10,5 +10,5 @@ def translate_text(text, target_lang="en"):
         return translated.text
     except Exception as e:
         # In case something goes wrong with the translation API
-        print(f"❌ Translation failed: {e}")
+        print(f" Translation failed: {e}")
         return "[Translation Error]"
