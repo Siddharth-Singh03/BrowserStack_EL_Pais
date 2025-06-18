@@ -14,7 +14,7 @@ configs = [
 ]
 
 def task_runner(cfg):
-    print(f"\n🚀 Starting test: {cfg}")
+    print(f"\n Starting test: {cfg}")
     titles = scrape_articles(
         USERNAME,
         ACCESS_KEY,
@@ -23,7 +23,7 @@ def task_runner(cfg):
         cfg["os_version"]
     )
     run_translation_and_analysis(titles)
-    print(f"✅ Finished test: {cfg}")
+    print(f"Finished test: {cfg}")
 
 if __name__ == "__main__":
     with ThreadPoolExecutor(max_workers=5) as executor:
