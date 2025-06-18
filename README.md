@@ -23,7 +23,7 @@ python main.py
 
 ## BrowserStack
 Sign up: https://www.browserstack.com/users/sign_up  
-Once you have credentials, configure `browserstack_config.py` (to be added)
+After getting credentials, configure `browserstack_config.py` (to be added)
 
 ## Notes
 - Free googletrans used
