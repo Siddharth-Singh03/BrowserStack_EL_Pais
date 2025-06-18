@@ -25,19 +25,19 @@ def scrape_articles(username, access_key, browser, os_name, os_version):
             EC.invisibility_of_element_located((By.CLASS_NAME, "blockNavigation"))
         )
     except:
-        print("⚠️ Warning: Overlay still visible, proceeding anyway.")
+        print(" Warning: Overlay still visible, proceeding anyway.")
 
     try:
         accept_button = WebDriverWait(driver, 5).until(
             EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Accept']"))
         )
         accept_button.click()
-        print("✅ Clicked Accept on consent popup.")
+        print("Clicked Accept on consent popup.")
         WebDriverWait(driver, 5).until(
             EC.invisibility_of_element_located((By.CLASS_NAME, "didomi-popup"))
         )
     except:
-        print("ℹ️ No consent popup found or could not close it.")
+        print("No consent popup found or could not close it.")
 
     opinion_link = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'Opinión')]"))
@@ -59,7 +59,7 @@ def scrape_articles(username, access_key, browser, os_name, os_version):
         a_tag = article.find("a")
         link = a_tag["href"] if a_tag and a_tag.has_attr("href") else None
         if not link:
-            print("⚠️ Skipping article due to missing link.")
+            print("Skipping article due to missing link.")
             continue
 
         full_link = f"https://elpais.com{link}" if link.startswith("/") else link
@@ -68,7 +68,7 @@ def scrape_articles(username, access_key, browser, os_name, os_version):
         article_soup = BeautifulSoup(driver.page_source, "html.parser")
         paragraphs = article_soup.select("p")
         content = "\n".join(p.get_text() for p in paragraphs[:5])
-        print(f"📄 Content:\n{content}")
+        print(f"Content:\n{content}")
 
         image = article_soup.find("img")
         if image and image.get("src"):
@@ -76,9 +76,9 @@ def scrape_articles(username, access_key, browser, os_name, os_version):
             if img_url.startswith("http"):
                 download_image(img_url, f"article_{idx + 1}.jpg")
             else:
-                print(f"⚠️ Skipping non-http image: {img_url[:30]}...")
+                print(f"Skipping non-http image: {img_url[:30]}...")
         else:
-            print("ℹ️ No image found for this article.")
+            print("No image found for this article.")
 
     driver.quit()
     return original_titles
@@ -86,13 +86,13 @@ def scrape_articles(username, access_key, browser, os_name, os_version):
 def run_translation_and_analysis(titles):
     # Translate each title to English
     translated = [translate_text(title) for title in titles]
-    print("\n\n🌐 Translated Titles (English):")
+    print("\n\n Translated Titles (English):")
     for i, t in enumerate(translated):
         print(f"{i+1}. {t}")
 
     # Count and print repeated words across all translated titles
     repeated = get_repeated_words(translated)
-    print("\n🔁 Repeated Words:")
+    print("\n Repeated Words:")
     for word, count in repeated.items():
         print(f"{word}: {count}")
 
