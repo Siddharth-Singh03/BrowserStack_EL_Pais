@@ -11,12 +11,12 @@ def download_image(url, filename, folder="images"):
             # Save image content to a file
             with open(os.path.join(folder, filename), "wb") as f:
                 f.write(response.content)
-            print(f"✅ Image saved: {filename}")
+            print(f"Image saved: {filename}")
         else:
-            print(f"❌ Failed to download image: {url}")
+            print(f"Failed to download image: {url}")
     except Exception as e:
         # Catch and print any errors during download
-        print(f"❌ Error downloading image: {e}")
+        print(f"Error downloading image: {e}")
 
 def get_repeated_words(text_list):
     from collections import Counter
